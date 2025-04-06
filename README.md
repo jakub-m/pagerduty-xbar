@@ -1,10 +1,13 @@
 # pagerduty-xbar
 ![GitHub branch check runs](https://img.shields.io/github/check-runs/jakub-m/pagerduty-xbar/main?logo=github)
 
-
 Show Pager duty status in [xbar][xbar].
 
 [xbar]: https://github.com/matryer/xbar
+
+![Screenshot showing the appearance of the plugin](doc/example.jpg)
+
+## Configuration
 
 Requires the following environment variables to work (in `~/.config/pg_xbar.conf`)
 - `PG_SCHEDULE_ID` - ID of the schedule, can be take from PagerDuty URL.
