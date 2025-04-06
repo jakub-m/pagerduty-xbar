@@ -1,4 +1,6 @@
 # pagerduty-xbar
+![GitHub branch check runs](https://img.shields.io/github/check-runs/jakub-m/pagerduty-xbar/main?logo=github)
+
 
 Show Pager duty status in [xbar][xbar].
 
