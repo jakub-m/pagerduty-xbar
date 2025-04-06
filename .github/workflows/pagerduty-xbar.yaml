@@ -23,14 +23,12 @@ jobs:
         with:
           target: ${{ matrix.platform.target }}
           args: "--locked --release"
-          working-directory: ./pagerduty-xbar
           strip: true
       - name: Test - ${{ matrix.platform.os-name }}
         uses: houseabsolute/actions-rust-cross@v1
         with:
           command: test
           target: ${{ matrix.platform.target }}
-          working-directory: ./pagerduty-xbar
       - name: Release - ${{ matrix.platform.os-name }}
         uses: houseabsolute/actions-rust-release@v0
         if: startsWith(github.ref, 'refs/tags/v')
@@ -38,7 +36,6 @@ jobs:
           target: ${{ matrix.platform.target }}
           executable-name: example
           changes-file: ""
-          working-directory: ./pagerduty-xbar
           extra-files: |
             xbar_pagerduty.sh
             xbar_pagerduty_plugin.sh
