@@ -1,5 +1,7 @@
 # pagerduty-xbar
-![GitHub branch check runs](https://img.shields.io/github/check-runs/jakub-m/pagerduty-xbar/main?logo=github)
+[![GitHub branch check runs](https://img.shields.io/github/check-runs/jakub-m/pagerduty-xbar/main?logo=github)](https://github.com/jakub-m/pagerduty-xbar/actions)
+[![GitHub Release](https://img.shields.io/github/v/release/jakub-m/pagerduty-xbar)](https://github.com/jakub-m/pagerduty-xbar/releases)
+
 
 Show Pager duty status in [xbar][xbar].
 
