@@ -71,12 +71,20 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             format_timedelta(delta)
         };
 
+        let schedule_id = &oncall.schedule.id;
+        let schedule_href = args
+            .pagerduty_domain
+            .as_ref()
+            .map(|domain| format!("| href={domain}/schedules#{schedule_id}"))
+            .unwrap_or("".to_owned());
+
         println!(
-            "{} - ({}) {} - {}",
+            "{} - ({}) {} - {}{}",
             oncall.schedule.summary,
             time_remaining,
             format_readable(oncall.start),
-            format_readable(oncall.end)
+            format_readable(oncall.end),
+            schedule_href,
         );
     }
 
@@ -117,8 +125,10 @@ async fn get_oncalls(
         .header("Authorization", format!("Token token={pg_auth_token}"))
         .send()
         .await?;
+    let response_text = res.text().await?;
+    debug!("Response: {}", &response_text);
 
-    let oncalls: Oncalls = res.json().await?;
+    let oncalls: Oncalls = serde_json::from_str(&response_text)?;
     debug!("Got oncalls={oncalls:?}");
 
     let user_oncalls = oncalls
@@ -153,14 +163,27 @@ fn format_timedelta(delta: TimeDelta) -> String {
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
 struct Args {
+    /// Enable debug log.
     #[arg(short, long, default_value_t = false)]
     debug: bool,
+
+    /// Id of the PagerDuty schedule.
     #[arg(long, env = "PG_SCHEDULE_ID")]
     schedule_id: String,
+
+    /// PagerDuty authentication token, can be generated in PagerDuty.
     #[arg(long, env = "PG_AUTH_TOKEN")]
     auth_token: String,
+
+    /// PagerDuty user ID.
     #[arg(long, env = "PG_USER_ID")]
     user_id: String,
+
+    /// Three icons to be used the task bar for oncall, soon oncall, off call.
     #[arg(long, env = "PG_ICONS", default_value_t = String::from(""))]
     icons: String,
+
+    /// PagerDuty domain to be used in URLs, like "https://your-company.pagerduty.com"
+    #[arg(long, env = "PG_DOMAIN")]
+    pagerduty_domain: Option<String>,
 }

@@ -21,7 +21,6 @@ pub struct User {
 
 #[derive(Deserialize, Debug)]
 pub struct Schedule {
+    pub id: String,
     pub summary: String,
 }
-
-
