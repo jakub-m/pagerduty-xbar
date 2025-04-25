@@ -22,15 +22,19 @@ fi
 set -a
 source "${config_file}"
 set +a
+bin="pagerduty-xbar"
 if [[ -e Cargo.toml ]]; then
   cargo run -- "$@"
 else
-  release_file="${SCRIPT_DIR}/target/release/pagerduty-xbar"
+  release_file="${SCRIPT_DIR}/target/release/${bin}"
   if [[ -e "${release_file}" ]]; then
     exec "${release_file}"
+  elif [[ -e "${SCRIPT_DIR}/${bin}" ]]; then
+    # This case is for homebrew install when the bash script lands in the same bin/ directory with the binary.
+    exec "${SCRIPT_DIR}/${bin}"
   else
     echo "⚠️"
     echo "---"
-    echo 'target/release/pagerduty-xbar missing. Make sure to run `cargo build --release`'
+    echo 'target/release/pagerduty-xbar missing. Make sure to run `cargo build --release` or that the binary is in the same directory as the script.'
   fi
 fi
