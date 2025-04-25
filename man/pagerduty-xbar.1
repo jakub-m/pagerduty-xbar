@@ -1,0 +1,49 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "PAGERDUTY\-XBAR" "1" "April 2025" "" ""
+.
+.SH "NAME"
+\fBpagerduty\-xbar\fR \- don\'t miss your PagerDuty shift again
+.
+.SH "SYNOPSIS"
+\fBpagerduty\-xbar\fR \- Get PagerDuty incoming shifts in a format suitable for xbar \fIhttps://github\.com/matryer/xbar\fR or SwiftBar \fIhttps://github\.com/swiftbar/SwiftBar\fR\.
+.
+.SH "DESCRIPTION"
+Show Pager duty status in xbar \fIhttps://github\.com/matryer/xbar\fR\.
+.
+.SH "CONFIGURATION"
+Requires the following environment variables to work (in \fB~/\.config/pg_xbar\.conf\fR)
+.
+.IP "\(bu" 4
+\fBPG_SCHEDULE_ID\fR \- ID of the schedule, can be take from PagerDuty URL\.
+.
+.IP "\(bu" 4
+\fBPG_AUTH_TOKEN\fR \- Authentication token, generate it in PagerDuty settings\.
+.
+.IP "\(bu" 4
+\fBPG_USER_ID\fR \- your user ID, available in your profile URL\.
+.
+.IP "\(bu" 4
+\fBPG_ICONS\fR \- Optional set of there icons: on\-duty, tomorrow\-on\-duty, not\-on\-duty\.
+.
+.IP "\(bu" 4
+\fBPG_DOMAIN\fR \- An optional PagerDuty domain that will be used in the URLS\.
+.
+.IP "" 0
+.
+.P
+Link the \fBxbar_pagerduty_plugin\.sh\fR script to xbar or SwiftBar:
+.
+.IP "" 4
+.
+.nf
+
+ln \-s $(realpath /opt/homebrew/bin/xbar_pagerduty_plugin\.sh) "$HOME/Library/Application Support/xbar/plugins/pagerduty\.5m\.sh"
+# or
+ln \-s $(realpath /opt/homebrew/bin/xbar_pagerduty_plugin\.sh) "$HOME/Library/Application Support/SwiftBar/plugins/pagerduty\.5m\.sh"
+.
+.fi
+.
+.IP "" 0
+

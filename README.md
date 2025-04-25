@@ -50,3 +50,13 @@ ln -s $(realpath xbar_pagerduty_plugin.sh) "$HOME/Library/Application Support/xb
 You can also place `xbar_pagerduty_plugin.sh` in the plugins folder manually, just make sure to change the path pointing to `xbar_pagerduty.sh`.
 
 NOTE: macOS will most likely complain about untrusted binaries. To fix this go to "Privacy & Security" in System Settings and look for a warning in the "Security" section where you can choose to trust the program.
+
+### man pages
+
+There is a `man` page in [./man][./man] directory. To build and test it do:
+
+```
+brew install ronn
+ronn man/pagerduty-xbar.md  --roff
+man ./man/pagerduty-xbar.1
+```
